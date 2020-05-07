@@ -5,7 +5,7 @@ const prisma = new PrismaClient()
 
 const typeDefs = `
   type Query {
-    testCreateUser: String
+    testCreateUser: User!
     testGetUsers: [User!]!
   }
 
@@ -20,21 +20,16 @@ const typeDefs = `
 const resolvers = {
   Query: {
     testCreateUser: async () => {
-        await prisma.users.create({
+        return await prisma.users.create({
             data: {
                 firstname: 'Alice',
                 lastname: 'Cooper',
                 photo_url: ''
             }
         })
-        
-        console.log('user created')
-        return 'user created'
     },
     testGetUsers: async () => {
-        const allUsers = await prisma.users.findMany()
-
-        return allUsers
+        return await prisma.users.findMany()
     }
   }
 }
