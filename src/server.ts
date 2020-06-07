@@ -7,9 +7,9 @@ import resolvers from './resolvers'
 const prisma = new PrismaClient()
 
 const testMiddleware = async (resolver, parent, args, ctx, info) => {
-    await console.log('middleware: before')
+    console.log('middleware: before')
     const result = await resolver(parent, args, ctx, info)
-    await console.log('middleware: after')
+    console.log('middleware: after')
     return result
 }
 
